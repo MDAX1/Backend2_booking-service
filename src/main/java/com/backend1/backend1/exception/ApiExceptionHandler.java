@@ -18,6 +18,7 @@ public class ApiExceptionHandler {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.SERVICE_UNAVAILABLE, e.getMessage());
         problem.setTitle("Kundtjänsten otillgänglig");
         problem.setType(URI.create("https://pensionat.se/errors/service-unavailable"));
+        problem.setProperty("errorCode", "CUSTOMER_SERVICE_UNAVAILABLE");
         problem.setProperty("timestamp", Instant.now());
         return problem;
     }
@@ -27,6 +28,7 @@ public class ApiExceptionHandler {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
         problem.setTitle("Bokningskonflikt");
         problem.setType(URI.create("https://pensionat.se/errors/conflict"));
+        problem.setProperty("errorCode", "ROOM_ALREADY_BOOKED");
         problem.setProperty("timestamp", Instant.now());
         return problem;
     }
@@ -36,6 +38,7 @@ public class ApiExceptionHandler {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
         problem.setTitle("Ogiltig bokning");
         problem.setType(URI.create("https://pensionat.se/errors/bad-request"));
+        problem.setProperty("errorCode", "VALIDATION_FAILED");
         problem.setProperty("timestamp", Instant.now());
         return problem;
     }
@@ -45,6 +48,7 @@ public class ApiExceptionHandler {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
         problem.setTitle("Hittades inte");
         problem.setType(URI.create("https://pensionat.se/errors/not-found"));
+        problem.setProperty("errorCode", "NOT_FOUND");
         problem.setProperty("timestamp", Instant.now());
         return problem;
     }
@@ -58,6 +62,7 @@ public class ApiExceptionHandler {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, detail);
         problem.setTitle("Valideringsfel");
         problem.setType(URI.create("https://pensionat.se/errors/bad-request"));
+        problem.setProperty("errorCode", "VALIDATION_FAILED");
         problem.setProperty("timestamp", Instant.now());
         return problem;
     }
