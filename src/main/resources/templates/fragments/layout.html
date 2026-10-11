@@ -424,23 +424,34 @@
 
             <!-- Desktop right actions -->
             <div id="bk-nav-actions"
-                 style="display:flex;align-items:center;gap:4px;margin-left:auto;flex-shrink:0">
-        <span style="color:rgba(255,255,255,.85);font-size:13px;font-weight:600;
-                     padding:5px 10px;cursor:default">
-          &#127480;&#127466; SEK
-        </span>
+                 style="display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0">
+                <span style="color:rgba(255,255,255,.85);font-size:13px;font-weight:600;
+                             padding:5px 8px;cursor:default">
+                  🇸🇪 SEK
+                </span>
                 <a th:href="@{/rooms/new}"
                    style="color:rgba(255,255,255,.88);font-size:13px;font-weight:600;
-                  padding:5px 10px;text-decoration:none;border-radius:2px;
-                  transition:background .15s">
-                    Registrera ditt boende
+                          padding:5px 10px;text-decoration:none;border-radius:2px;
+                          transition:background .15s">
+                    Registrera boende
                 </a>
-                <a th:href="@{/login}"
-                   style="background:#006ce4;border:1px solid #006ce4;color:#fff;border-radius:2px;
-  font-size:13px;font-weight:700;padding:6px 14px;text-decoration:none;
-  margin-left:2px">
-                    Logga in
-                </a>
+                <div th:if="${session.AUTH_TOKEN != null}" style="display:flex;align-items:center;gap:8px">
+                    <span style="color:#febb02;font-size:13px;font-weight:700">
+                        <i class="bi bi-person-check-fill me-1"></i><span th:text="${session.LOGGED_IN_USER != null ? session.LOGGED_IN_USER : 'admin'}">admin</span>
+                    </span>
+                    <a th:href="@{/logout}"
+                       style="background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:3px;
+                              font-size:12.5px;font-weight:700;padding:5px 12px;text-decoration:none">
+                        Logga ut
+                    </a>
+                </div>
+                <div th:if="${session.AUTH_TOKEN == null}">
+                    <a th:href="@{/login}"
+                       style="background:#006ce4;border:1px solid #006ce4;color:#fff;border-radius:2px;
+                              font-size:13px;font-weight:700;padding:6px 14px;text-decoration:none;margin-left:2px">
+                        Logga in
+                    </a>
+                </div>
             </div>
 
             <!-- Hamburger (mobile) -->
@@ -462,20 +473,26 @@
             <a th:href="@{/bookings/search}"
                style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.85);
                 text-decoration:none;font-size:13.5px;font-weight:600;padding:10px 16px;
-                white-space:nowrap;border-bottom:2px solid #fff;color:#fff">
-                &#127968; <span>Boende</span>
+                white-space:nowrap">
+                🏠 <span>Boende</span>
             </a>
             <a th:href="@{/bookings}"
-               style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);
+               style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.85);
                 text-decoration:none;font-size:13.5px;font-weight:600;padding:10px 16px;
-                white-space:nowrap;border-bottom:2px solid transparent">
-                &#128197; <span>Bokningar</span>
+                white-space:nowrap">
+                📅 <span>Bokningar</span>
             </a>
             <a th:href="@{/rooms}"
-               style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);
+               style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.85);
                 text-decoration:none;font-size:13.5px;font-weight:600;padding:10px 16px;
-                white-space:nowrap;border-bottom:2px solid transparent">
-                &#128682; <span>Rum</span>
+                white-space:nowrap">
+                🚪 <span>Rum</span>
+            </a>
+            <a th:href="@{/customers}"
+               style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,.85);
+                text-decoration:none;font-size:13.5px;font-weight:600;padding:10px 16px;
+                white-space:nowrap">
+                👥 <span>Kunder</span>
             </a>
 
         </div>
@@ -488,23 +505,36 @@
         <a th:href="@{/bookings/search}"
            style="color:rgba(255,255,255,.9);text-decoration:none;font-size:15px;font-weight:600;
               padding:13px 20px;border-bottom:1px solid rgba(255,255,255,.07)">
-            &#127968; Sök lediga rum
+            🏠 Sök lediga rum
         </a>
         <a th:href="@{/bookings}"
            style="color:rgba(255,255,255,.9);text-decoration:none;font-size:15px;font-weight:600;
               padding:13px 20px;border-bottom:1px solid rgba(255,255,255,.07)">
-            &#128197; Bokningar
+            📅 Bokningar
         </a>
         <a th:href="@{/rooms}"
            style="color:rgba(255,255,255,.9);text-decoration:none;font-size:15px;font-weight:600;
               padding:13px 20px;border-bottom:1px solid rgba(255,255,255,.07)">
-            &#128682; Rum
+            🚪 Rum
+        </a>
+        <a th:href="@{/customers}"
+           style="color:rgba(255,255,255,.9);text-decoration:none;font-size:15px;font-weight:600;
+              padding:13px 20px;border-bottom:1px solid rgba(255,255,255,.07)">
+            👥 Kunder
         </a>
         <div style="border-top:1px solid rgba(255,255,255,.15);margin:0"></div>
         <a th:href="@{/bookings/new}"
            style="color:rgba(255,255,255,.9);text-decoration:none;font-size:15px;font-weight:600;
-              padding:13px 20px">
-            &#10133; Ny bokning
+              padding:13px 20px;border-bottom:1px solid rgba(255,255,255,.07)">
+            ➕ Ny bokning
+        </a>
+        <a th:if="${session.AUTH_TOKEN != null}" th:href="@{/logout}"
+           style="color:#ff8080;text-decoration:none;font-size:15px;font-weight:600;padding:13px 20px">
+            🚪 Logga ut
+        </a>
+        <a th:if="${session.AUTH_TOKEN == null}" th:href="@{/login}"
+           style="color:#66b2ff;text-decoration:none;font-size:15px;font-weight:600;padding:13px 20px">
+            🔑 Logga in
         </a>
     </div>
 
